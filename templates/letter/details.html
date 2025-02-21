@@ -1,0 +1,64 @@
+{% extends 'examination/base.html' %} 
+
+{% block title %} Letter {% endblock %}
+
+{% block pagetitle %} 
+<div class="d-flex justify-content-between align-items-center">
+    <h4>Details for: <b>{{letter.surname}}, {{ letter.name }}</b></h4> 
+ <a class="btn btn-primary"
+  href="{% url 'letter:createLetter' %}">Create Letters</a>
+  
+ </div>
+{%  endblock %}
+
+{% block body %}
+
+<table class="table table-bordered">
+    <tr>
+      <td>Surname Name</td>
+      <td>{{ letter.surname }}</td>
+    </tr>
+    <tr>
+      <td>Other Names</td>
+      <td>{{ letter.name }}</td>
+    </tr>
+      <tr>
+       <td>Institution Address</td>
+      <td>{{ letter.institutionAddress }}</td> 
+      </tr>
+      <tr>
+         <td>Role</td>
+      <td>{{ letter.role }}</td>
+      </tr>
+     <tr>
+       <td>Membership OR Fellowship</td>
+      <td>{{ letter.membershipOrFellowship }}</td>
+     </tr>
+     <tr>
+      <td>Hotel</td>
+      <td>{{ letter.hotel }}</td>
+     </tr>
+      <tr>
+         <td>CC</td>
+      <td>{{ letter.cc }}</td>
+      </tr>
+     <tr>
+       <td>Center of Examination</td>
+      <td>{{ letter.centerOfTheExamination }}</td>
+     </tr>
+     <tr>
+       <td>Arrival Date</td>
+      <td>{{ letter.arrivalDate }}</td>
+     </tr>
+     <tr>
+        <td>Departure Date Date</td>
+       <td>{{ letter.depatureDate }}</td>
+      </tr>
+      <tr>
+        <td>Email Address</td>
+       <td>{{ letter.email }}</td>
+      </tr>
+     
+    
+   </table>
+   {% endblock %}

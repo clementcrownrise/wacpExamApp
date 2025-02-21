@@ -1,0 +1,35 @@
+{% extends 'examination/base.html' %} 
+
+{% block title %} Create Examination {% endblock %}
+
+{% block pagetitle %}
+<div class="d-flex justify-content-between align-items-center">
+   <h4>Create Letters</h4> 
+<a class="btn btn-primary" href="{% url 'letter:index' %}">
+    Back to Letter List</a>
+    {% load static %}
+    <a class="btn btn-dark" href="{% static 'WACPLetterTemplate.xlsx' %}">
+        Download Template</a>
+</div>
+ 
+{%  endblock %}
+
+{% block body %}
+       
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group mb-5">
+    <label for="" class="mb-3">Select Examination</label>
+    <select name="examination" id="" class="form-control">
+        <option value="selected">Please Select an Examination</option>
+    {% for examination in examinations %}
+    <option value="{{ examination.id}}">{{ examination}}</option>
+{% endfor %}
+</select>
+</div>
+    {{ form.as_p  }}
+    <button type="submit" class="btn btn-primary form-control mt-2">Upload</button>
+</form>
+
+{% endblock %}

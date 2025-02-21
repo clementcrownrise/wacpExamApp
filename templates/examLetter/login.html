@@ -1,0 +1,92 @@
+{% extends 'examination/loginbase.html' %} 
+
+{% block title %} Login {% endblock %}
+
+{% block pagetitle %} 
+<div class="d-flex justify-content-between align-items-center">
+
+ </div>
+{%  endblock %}
+
+{% block body %}
+
+
+
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+            <div class="d-flex justify-content-center py-4">
+                {% load static %}
+                <img src="{% static 'wacplogo.png' %}" height="150px"  alt="logo">
+        
+            </div><!-- End Logo -->
+
+            <div class="card mb-3">
+
+              <div class="card-body">
+
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Login </h5>
+                  <p class="text-center small">Enter your username & password to login</p>
+                </div>
+
+                <form method="post" action="." class="row g-3">
+                    {% csrf_token %}
+                     
+                    {%  if form.errors or form.non_field_errors %}
+                    <div class="alert alert-danger">
+                       {% for field in form  %}
+                            {{ field.errors }}
+                       {% endfor %}
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+                
+                <div class="col-12">
+                    <label for="yourUsername" class="inline-block mb-2">Username</label>
+                    <div class="input-group has-validation">
+                        {{ form.username }}
+                      <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+                  </div>
+                
+
+                  <div class="col-12">
+                    <label for="yourUsername" class="inline-block mb-2">Password</label>
+                    <div class="input-group has-validation">
+                        {{ form.password }}
+                      <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+                  </div>
+                                
+                 
+                 
+                    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                </form>
+
+
+
+              
+
+              </div>
+            </div>
+
+            <div class="credits">
+               
+            </div>
+
+          </div>
+          
+        </div>
+      </div>
+ <p><center>© Copyright West African College of Physicians. All Rights Reserved <br>
+                    Developed by Double-Edge Technologies</center></p>
+    </section>
+
+
+
+
+
+{% endblock %}

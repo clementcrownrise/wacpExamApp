@@ -1,0 +1,30 @@
+{% extends 'examination/base.html' %} 
+
+{% block title %} Create Examination {% endblock %}
+
+{% block pagetitle %}
+<div class="d-flex justify-content-between align-items-center">
+   <h4>Create Examination</h4> 
+<a class="btn btn-primary" href="{% url 'examination:index' %}">Back to Examination List</a>
+ 
+</div>
+ {% endblock %}
+ <style type="text/css">
+ </style>
+{%  block body %}
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+   
+
+
+
+    {{ form.as_p }}
+    <button type="submit" class="form-control btn btn-primary">Save</button>
+</form>
+  
+
+
+{% endblock %}

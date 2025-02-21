@@ -1,0 +1,26 @@
+{% extends 'examination/base.html' %} 
+
+{% block title %} Letter {% endblock %}
+
+{% block pagetitle %} 
+
+{%  endblock %}
+
+{% block body %}
+
+<div class="d-flex justify-content-between align-items-center">
+    
+    <h2>Are you sure you want to delete "{{ examination.examName }}"?</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+</form>
+
+<a href="{% url 'examination:index' %}" class="btn btn-primary">Cancel</a>
+
+
+ </div>
+
+
+{% endblock %}

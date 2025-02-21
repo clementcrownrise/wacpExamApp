@@ -1,0 +1,32 @@
+{% extends 'examination/base.html' %} 
+
+{% block title %} Create Examination {% endblock %}
+
+{% block pagetitle %}
+<div class="d-flex justify-content-between align-items-center">
+   <h4>Create Examination</h4> 
+<a class="btn btn-primary" href="{% url 'examination:index' %}">Back to Examination List</a>
+ 
+</div>
+ {% endblock %}
+ <style type="text/css">
+ </style>
+{%  block body %}
+
+<h3>Edit:  {{ examination.examName }}</h3>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <div class="d-flex justify-content-start space-x:3">
+  <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+    <a href="{% url 'examination:index' %}" class="btn btn-danger btn-lg">Cancel</a>
+
+    </div>
+  
+</form>
+  
+
+{% endblock %}

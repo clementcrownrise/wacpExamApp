@@ -1,0 +1,122 @@
+{% extends 'examination/base.html' %} 
+ {% load static %}
+{% block title %} Examination {% endblock %}
+
+{% block pagetitle %}
+<div class="d-flex justify-content-between align-items-center">
+   <h4>Examination Details:{{ examination.examName }}</h4> 
+
+ <a href=""><button type="submit" class="btn btn-success">Send Mail</button></a> 
+ 
+</div>
+ 
+{%  endblock %}
+
+{% block body %}
+       <table class="table table-bordered">
+        <tr>
+          <td>Examination Name</td>
+          <td>{{ examination.examName }}</td>
+        </tr>
+        <tr>
+          <td>TOT Topic</td>
+          <td>{{ examination.totTopic }}</td>
+        </tr>
+          <tr>
+           <td>TOT Flyer</td>
+          <td>
+            <img src="{{ examination.totFlyers.url }}" width="500px" alt="totFlyer"/>
+            </td> 
+          </tr>
+          <tr>
+             <td>TOT Date</td>
+          <td>{{ examination.totDate }}</td>
+          </tr>
+         <tr>
+           <td>TOT Details</td>
+          <td>{{ examination.totDetails }}</td>
+         </tr>
+         <tr>
+          <td>Ibadan Time Table</td>
+          <td>{{ examination.timetableIbadan }} | 
+            <a href="{{  examination.timetableIbadan.url }}" target="_blank">View File</a> </td>
+         </tr>
+          <tr>
+             <td>Accra Time Table</td>
+          <td>{{ examination.timetableAccra }} |
+              <a href="{{  examination.timetableAccra.url }}" target="_blank">View File</a></td>
+          </tr>
+         <tr>
+           <td>Abuja Time Table</td>
+          <td>{{ examination.timetableAbuja }} | 
+            <a href="{{  examination.timetableAbuja.url }}" target="_blank">View File</a>
+          </td>
+         </tr>
+         <tr>
+           <td>Travel Protocol</td>
+          <td>{{ examination.travelProtocol }} | 
+            <a href="{{  examination.travelProtocol.url }}" target="_blank">View File</a>
+          </td>
+         </tr>
+         
+        
+       </table>
+
+<h2>Letters:</h2>
+<!-- Bordered Table -->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Name</th>
+      <th scope="col">Institution Address</th>
+      <th scope="col">Examination Center</th>
+          <th scope="col">Email</th>
+   </tr>
+  </thead>
+  <tbody>
+      {% for letter in letters %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ letter.surname }}</td>
+      <td>{{ letter.name }}</td>
+      <td>{{ letter.institutionAddress }}</td>
+      <td>{{ letter.centerOfTheExamination }}</td>
+          <td>{{ letter.email }}</td>
+      <td>
+        <a href="{% url 'letter:details' letter.id  %}"> 
+          <button class="btn btn-dark">View </button></a>
+         <button class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+    {%  empty %}
+    <h4>This examination has no letters</h4>
+    {%  endfor %}
+  </tbody>
+</table>
+<!-- End Bordered Table -->
+
+<!--paginator here-->
+
+<div class="pagination">
+  <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </span>
+</div>
+
+
+
+{% endblock %}
