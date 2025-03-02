@@ -16,15 +16,16 @@
  
 <div class="d-flex justify-content-between py-12">
 <h2>Letters:</h2>
-<form action="" method="POST" class="d-flex justify-content-between">
+<form action="" method="POST" class="d-flex justify-content-between gap:10px">
    {% csrf_token %}
-    <select name="examination" id="examination" class="form-control">
-        <option value="">Select an Examination</option>
-        {% for examination in examinations %}
-        <option value="{{ examination.id }}">{{ examination.examName }}</option>
-        {% endfor %}
-    </select>
+   
+   {{ form.examination }}
+   {{ form.faculty }}
+   
+   
     <button type="submit" class="btn btn-primary ml-2">Display</button>
+   <a href="#"> <button type="" class="btn btn-primary ml-2">Send Letter</button></a>
+
     <button type="button" class="btn btn-danger" onclick="window.history.back()">Cancel</button>
 
 </form>
@@ -40,6 +41,7 @@
       <th scope="col">Surname</th>
       <th scope="col">Name</th>
       <th scope="col">Examination Name</th>
+      <th scope="col">Faculty</th>
       <th scope="col">Examination Center</th>
         <th scope="col">Email</th>
         <th>Action</th>
@@ -52,16 +54,19 @@
       <td>{{ letter.surname }}</td>
       <td>{{ letter.name }}</td>
       <td>{{ letter.examination.examName }}</td>
+      <td>{{ letter.faculty }}</td>
       <td>{{ letter.centerOfTheExamination }}</td>
           <td>{{ letter.email }}</td>
       <td>
         <a href="{% url 'letter:details' letter.id  %}"> 
           <button class="btn btn-dark">View </button></a>
-         <button class="btn btn-danger">Delete</button>
+       <a href="{% url 'letter:mailsample' letter.id %}">
+         <button class="btn btn-danger">View Letter</button></a> 
+
       </td>
     </tr>
     {%  empty %}
-    <h4>This examination has no letters</h4>
+    <h4>Select an Examination and Faculty to display Letters</h4>
     {%  endfor %}
   </tbody>
 </table>

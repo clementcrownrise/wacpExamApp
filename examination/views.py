@@ -4,10 +4,21 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from . models import Examination
 from letter.models import Letter
+from faculty.models import Faculty
 from . forms import ExamForm
 
 
 # Create your views here.
+
+def selected(request):
+    if request.method == 'POST':
+        faculty = request.POST.get('faculty')
+        results  = Letter.objects.filter(faculty__icontains=faculty)
+        #return HttpResponse(results)
+        return render(request, "examination/examDetails.html", {'results': results})
+
+
+
 @login_required
 def index(request):
     #return HttpResponse("All created exams would be listed here")
@@ -21,6 +32,7 @@ def index(request):
 
 @login_required
 def exam_details(request, examination_id):
+    faculties = Faculty.objects.all()
     examination = get_object_or_404(Examination, id=examination_id)
     #letters = examination.letters.all()
     letters = Letter.objects.filter(examination_id = examination_id)
@@ -29,7 +41,9 @@ def exam_details(request, examination_id):
     page_obj = paginator.get_page(page_number)
 
     return render(request, "examination/examDetails.html",{'examination':examination,
-                                                            'letters':letters, 'page_obj': page_obj})
+                                                            'letters':letters,
+                                                              'page_obj': page_obj,
+                                                               'faculties':faculties })
 @login_required
 def deleteExam(request, examination_id):
     examination = get_object_or_404(Examination, id=examination_id)

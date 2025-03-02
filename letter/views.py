@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.core.mail import EmailMultiAlternatives #for email sending
 from django.template.loader import render_to_string #for sending email
 from django.utils.html import strip_tags  #for sending email
+from django.db.models import Q 
 import pandas as pd
 from django.contrib import messages
 from . forms import ExcelUploadForm
@@ -15,30 +16,45 @@ from io import BytesIO
 import tempfile
 import mimetypes
 from django.core.mail import EmailMessage
+from faculty.models import Faculty
+from .forms import SearchForm
 
 # Create your views here.
 @login_required
 def index(request):
-    #with open("output.pdf", "wb") as pdf_file:
-       #pisa.CreatePDF("<h1>Hello</h1>", pdf_file)
-
     examinations = Examination.objects.all()
+    faculties = Faculty.objects.all()
+    form = SearchForm(request.POST)
+    letters = Letter.objects.none()
+    page_obj = None 
+
+
     if request.method == 'POST':
-        examinations = request.POST.get('examination')
-        #return HttpResponse(examination)
-        letters = Letter.objects.filter(examination_id = examinations)
-        paginator = Paginator(letters, 20)
-        page_number = request.GET.get("page")
-        page_obj = paginator.get_page(page_number) 
+            if form.is_valid():
+                #return HttpResponse('am ai getting the right thing')
+                examination = request.POST.get('examination')
+                faculty =request.POST.get('faculty')
+                letters = Letter.objects.filter(Q(examination_id = examination)
+                                         & Q(faculty__icontains=faculty))
+                #return HttpResponse(faculty)
+                paginator = Paginator(letters, 20)
+                page_number = request.GET.get("page")
+                page_obj = paginator.get_page(page_number) 
+                
+    return render(request, 'letter/index.html',
+                  {'letters':letters ,
+                   'form': form,
+                    'page_obj': page_obj,
+                   'faculties': faculties,
+                   'examinations':examinations})
 
-    else:
-        examinations = Examination.objects.all()
-        letters = Letter.objects.all()
-        paginator = Paginator(letters, 20)
-        page_number = request.GET.get("page")
-        page_obj = paginator.get_page(page_number) 
-    return render(request, 'letter/index.html',{'letters':letters ,'page_obj': page_obj,'examinations':examinations})
 
+
+@login_required
+def mailSample(request, letter_id):
+    letter = get_object_or_404(Letter, id=letter_id)
+    #return HttpResponse(letter)
+    return render(request, 'letter/mailsample.html',{'letter': letter})
 
 @login_required
 def deleteAll(request):
@@ -83,6 +99,7 @@ def upload_excel(request):
                     onOrBefore = row['OnOrBefore'],
                     holdAt = row['HoldAt'],
                     countryOfTheExamination = row['CountryOfTheExamination'],
+                    InstitutionAddressCountry = row['InstitutionAddressCountry'],
 
                 )
             #return HttpResponse('Data Imported Successfully!')
@@ -97,7 +114,7 @@ def upload_excel(request):
 @login_required
 def generate_pdf(letter):
     template = get_template("emails/pdf_template.html")
-    html = template.render({'email': letter.email})  # ✅ Correct: Use `letter.email`
+    html = template.render({'email': letter.email})  #  Correct: Use `letter.email`
     pdf_buffer = BytesIO()
     pisa.CreatePDF(html, dest=pdf_buffer)
     return pdf_buffer
@@ -190,20 +207,18 @@ def sendLetter(request, id):
         email = EmailMultiAlternatives(
             subject,
             plain_message,  # Plain text content
-            "info@wacp-coam.org",  # From email
+            request.user.username,  # From email
             [letter.email],  # Recipient list
         )
         email.attach_alternative(html_message, "text/html")  # Attach HTML content
-        examCenters = ['Abuja','Enugu','Ibadan']
-        if not letter.centerOfTheExamination in examCenters:                
+        if  letter.InstitutionAddressCountry != letter.countryOfTheExamination:                
             for foreign_pdf_file in foreign_pdf_files:
-                if foreign_pdf_file:
-                    email.attach(foreign_pdf_file.name, foreign_pdf_file.read(),"application/pdf")                
+                email.attach(foreign_pdf_file.name,
+                                  foreign_pdf_file.read(),
+                                  "application/pdf")                
         else:   
             for pdf_file in pdf_files:
-                if pdf_file:
-                    email.attach(pdf_file.name, pdf_file.read(), "application/pdf")
-
+                email.attach(pdf_file.name, pdf_file.read(), "application/pdf")
        
         image_path = examination.totFlyers.path
         image_name = examination.totFlyers.name

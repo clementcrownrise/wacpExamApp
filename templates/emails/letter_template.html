@@ -13,7 +13,7 @@
     </script>
 </head>
 <body>
-    <h2>Dear  Prof/Dr. {{ letter.surname }} {{ letter.name }},</h2>
+    <h2>Dear  Dr. {{ letter.surname }} {{ letter.name }},</h2>
     <p>Please find attached INVITATION LETTER for the {{ letter.examination.examName }},
         including the Examination Timetable and TOT Flyer for your reference. </p>
    <p>Please note the following:</p>
@@ -34,7 +34,11 @@
     <p>
         You are entitled to a meal allowance of N6,000 (Six Thousand Naira) per weekday and 
         N12,000 (Twelve Thousand Naira) for weekends.
+        {% if letter.hotel != 'nan' %}
         YOU ARE ENTITLED TO A WELCOME MEAL ON ARRIVAL AT YOUR HOTEL.
+        {% elif letter.hotel == 'nan' %}
+
+        {% endif %}
     </p>
 
        
@@ -71,22 +75,32 @@ Department of Community Health,<br>
 Dear Prof/Dr. <b>{{ letter.name }}</b>,<br><br>
 <b>INVITATION LETTER FOR THE {{letter.examination.examName }}</b><br><br>
 On behalf of the President and Council of the West African College of Physicians (WACP), 
-I have the pleasure of inviting you to serve as an <b>{{ letter.role }}</b> for the
+I have the pleasure of inviting you to serve as <b>{{ letter.role }}</b> for the
 <b>{{letter.examination.examName }}</b>
 of the College. Kindly note: <br><br>
 
-1.The examinations would hold at the UNIVERSITY COLLEGE HOSPITAL (UCH), IBADAN, NIGERIA.<br><br>
-2.You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
+The examinations would hold at the {{ letter.holdAt }}<br><br>
+You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
 <b>{{ letter.faculty }}.</b><br><br>
-3.You are expected to arrive <b>{{ letter.centerOfTheExamination }}</b>, {{ letter.centerOfTheExaminationCountry }}
- on {{ letter.arrivalDate }} and depart on {{ letter.depatureDate }}. A copy of the examination timetable is attached.<br><br>
-4. Please ensure to purchase your return air ticket no later than 2 weeks before the date of arrival for the
-{{ letter.examination.examName }}. One-way air ticket bookings may no longer be entertained. 
-Please send your flight tickets to: flightticket@wacpcoam.org 
-5. You will be accommodated at  {{ letter.hotel }}.<br><br>
-6. As {{ letter.role }}, it is mandatory to contribute questions to the Examination Bank of the Faculty and ensure the 
+You are expected to arrive <b>{{ letter.centerOfTheExamination }}</b>, {{ letter.centerOfTheExaminationCountry }}
+ on <b>{{ letter.arrivalDate }}</b> and depart
+  on <b>{{ letter.depatureDate }}</b>. A copy of the examination timetable is 
+  attached.<br><br>
+Please ensure to purchase your return air ticket no later than
+ 2 weeks before the date of arrival for the
+<b>{{ letter.examination.examName }}</b>. One-way air ticket
+ bookings may no longer be entertained. 
+Please send your flight tickets to: flightticket@wacpcoam.org <br><br>
+{% if letter.hotel !='nan' %}
+You will be accommodated at <b> {{ letter.hotel }}</b>.<br><br>
+{% elif letter.hotel == 'nan' %}
+
+{% endif %}
+As <b>{{ letter.role }}</b>, it is mandatory to contribute
+ questions to the Examination Bank of the Faculty and ensure the 
 prompt return of assessed proposals.<br><br>
-7. You are kindly advised not to travel at night for security reasons.<br>
+
+You are kindly advised not to travel at night for security reasons.<br>
 NOTE <br>
 a) Kindly indicate your availability via the email addresses below: ha@wacpcoam.org, goodluckadmin@wacpcoam.org, hodexams@wacpcoam.org, 
 and copy secgen@wacpcoam.org, on or before {{ letter.onOrBefore }}. <br><br>
