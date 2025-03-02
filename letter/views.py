@@ -50,6 +50,7 @@ def index(request):
 
 
 
+
 @login_required
 def mailSample(request, letter_id):
     letter = get_object_or_404(Letter, id=letter_id)
@@ -177,11 +178,16 @@ def send_letter_view(request):
 
 
 @login_required
-def sendLetter(request, id):
-    examination = Examination.objects.get(id=id)
-    #return HttpResponse(examination)
-    letters = Letter.objects.filter(examination_id = id)  # Get all letter for a particular examination in the database
-    subject = examination
+def sendLetter(request):
+    examination = request.POST.get('examination')
+    facultyName = request.POST.get('faculty')
+    letters = Letter.objects.filter(Q(examination_id = examination)
+                                         & Q(faculty__icontains=facultyName))
+
+    #return HttpResponse(letters)
+    examination = Examination.objects.get(id = examination)
+    subject = examination.examName
+    #return HttpResponse(examination.examName)
     totFlyer = examination.totFlyers
     #return HttpResponse(totFlyer)
     #timetableIbadan = 'media/uploads/'

@@ -14,7 +14,7 @@ urlpatterns = [
     path("details/<int:letter_id>", views.letterDetails ,name='details'),
     path('deleteAll/', views.deleteAll, name='deleteAll'),
     path('send-email/', views.send_personalized_email, name='send-email'),
-    path('send-letter/<int:id>', views.sendLetter, name='send-letter'),
+    path('send-letter/', views.sendLetter, name='send-letter'),
 
 ]
 
