@@ -18,6 +18,7 @@ import mimetypes
 from django.core.mail import EmailMessage
 from faculty.models import Faculty
 from .forms import SearchForm
+import os
 
 # Create your views here.
 @login_required
@@ -219,12 +220,15 @@ def sendLetter(request):
         email.attach_alternative(html_message, "text/html")  # Attach HTML content
         if  letter.InstitutionAddressCountry != letter.countryOfTheExamination:                
             for foreign_pdf_file in foreign_pdf_files:
-                email.attach(foreign_pdf_file.name,
-                                  foreign_pdf_file.read(),
+                with open(foreign_pdf_file.path, "rb") as f:
+                    email.attach(os.path.basename(foreign_pdf_file.path),
+                                  f.read(),
                                   "application/pdf")                
         else:   
             for pdf_file in pdf_files:
-                email.attach(pdf_file.name, pdf_file.read(), "application/pdf")
+                with open(pdf_file.path, "rb") as f:
+                    email.attach(os.path.basename(pdf_file.path),
+                                  f.read(), "application/pdf")
        
         image_path = examination.totFlyers.path
         image_name = examination.totFlyers.name
