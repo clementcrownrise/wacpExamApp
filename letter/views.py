@@ -243,12 +243,12 @@ def sendLetter(request):
                 with open(pdf_file.path, "rb") as f:
                     email.attach(os.path.basename(pdf_file.path),
                                   f.read(), "application/pdf")
-       
-        image_path = examination.totFlyers.path
-        image_name = examination.totFlyers.name
-        file_type, _ = mimetypes.guess_type(image_path)  # Get correct content type
-        with open(image_path, 'rb') as img:
-            email.attach(image_name, img.read(), file_type) 
+        if totFlyer :
+            image_path = examination.totFlyers.path
+            image_name = examination.totFlyers.name
+            file_type, _ = mimetypes.guess_type(image_path)  # Get correct content type
+            with open(image_path, 'rb') as img:
+                email.attach(image_name, img.read(), file_type) 
         email.send()  #
     
     return HttpResponse("Emails have been sent!")

@@ -24,7 +24,9 @@
           <tr>
            <td>TOT Flyer</td>
           <td>
+            {% if examination.totFlyers %}
             <img src="{{ examination.totFlyers.url }}" width="500px" alt="totFlyer"/>
+            {% endif %}
             </td> 
           </tr>
           <tr>
