@@ -6,8 +6,8 @@ from django.forms.widgets import DateInput
 class Examination(models.Model):
     examName = models.CharField(max_length=200)
     totTopic = models.CharField(max_length=200)
-    totFlyers =models.ImageField(upload_to='uploads/')
-    totDate = models.DateField()
+    totFlyers =models.ImageField(upload_to='uploads/' , blank=True, null=True)
+    totDate = models.CharField()
     totDetails = models.TextField()
     timetableIbadan = models.FileField(upload_to='uploads/')
     timetableAccra = models.FileField(upload_to='uploads/')
