@@ -5,6 +5,7 @@ from django.core.mail import EmailMultiAlternatives #for email sending
 from django.template.loader import render_to_string #for sending email
 from django.utils.html import strip_tags  #for sending email
 from django.db.models import Q 
+from django.conf import settings
 import pandas as pd
 from django.contrib import messages
 from . forms import ExcelUploadForm
@@ -113,13 +114,6 @@ def upload_excel(request):
     
     return render(request, 'letter/create.html',{'form':form,'examinations':examinations})
 
-@login_required
-def generate_pdf(letter):
-    template = get_template("emails/pdf_template.html")
-    html = template.render({'email': letter.email})  #  Correct: Use `letter.email`
-    pdf_buffer = BytesIO()
-    pisa.CreatePDF(html, dest=pdf_buffer)
-    return pdf_buffer
 
 def send_personalized_email(request):
    
@@ -173,8 +167,20 @@ def send_letter_view(request):
     #sendLetter() the main one that sends letter
     return HttpResponse("Emails have been sent!")
 
+def generate_pdf(letter):
 
-
+    """Generates a PDF from the letter template"""
+    html_content = render_to_string("emails/attachment.html", {"letter": letter})
+    pdf_file = BytesIO()
+    
+    # Convert HTML to PDF
+    pisa_status = pisa.CreatePDF(html_content, dest=pdf_file)
+    
+    if pisa_status.err:
+        return None
+    
+    pdf_file.seek(0)  # Reset file pointer to start
+    return pdf_file
 
 
 
@@ -205,19 +211,27 @@ def sendLetter(request):
                   examination.timetableAccra, 
                   examination.timetableIbadan,
                 examination.travelProtocol]
+    
 
     
     for letter in letters:
         html_message = render_to_string("emails/letter_template.html", {"letter": letter})
         plain_message = strip_tags(html_message)  # Remove HTML for plain text version
+         
 
         email = EmailMultiAlternatives(
             subject,
             plain_message,  # Plain text content
-            request.user.username,  # From email
+            request.user.username or "adeyemi.tosin@wacpcoam.org" , # Or any other valid email
             [letter.email],  # Recipient list
         )
         email.attach_alternative(html_message, "text/html")  # Attach HTML content
+
+        #i attached the generated guys here
+        pdf_file = generate_pdf(letter)
+        if pdf_file:
+            email.attach(f"Invitation_Letter_{letter.surname}.pdf", pdf_file.getvalue(), "application/pdf")
+
         if  letter.InstitutionAddressCountry != letter.countryOfTheExamination:                
             for foreign_pdf_file in foreign_pdf_files:
                 with open(foreign_pdf_file.path, "rb") as f:

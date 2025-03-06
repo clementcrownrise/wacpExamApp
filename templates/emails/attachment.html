@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+</head>
+<body>
+
+    <table>
+        <tr>
+            
+            <td colspan="2">
+                <img src="https://wacp-coam.org/public/images/letterApp/letterHead.png" 
+                width="850px" height="150px">
+            </td>
+        </tr>
+        <tr>
+            <td><img src="https://wacp-coam.org/public/images/letterApp/letterSide.jpg"
+                height="900px" width="150px"></td>
+            <td>
+                <div id="mailholder" style="
+                width: 700px;
+                margin: 20px auto;
+                 padding: 10px;
+                text-align: justify;">
+            
+            <p style="float: right;">{{ letter.created_at|date:"F d, Y" }}</p><br>
+                         
+                            <br><br>
+                    Dr. <b>{{ letter.surname }} {{ letter.name }}</b>, <br>
+            Department of {{ letter.faculty }},<br>
+            <b>{{ letter.institutionAddress }}</b><br><br>
+            Dear Dr. <b>{{ letter.name }}</b>,<br><br>
+            <b>INVITATION LETTER FOR THE {{letter.examination.examName }}</b><br><br>
+            On behalf of the President and Council of the West African College of Physicians (WACP), 
+            I have the pleasure of inviting you to serve as <b>{{ letter.role }}</b> for the
+            <b>{{letter.examination.examName }}</b>
+            of the College. Kindly note: <br><br>
+            
+            The examinations would hold at the {{ letter.holdAt }}<br><br>
+            
+            You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
+            <b>{{ letter.faculty }}.</b><br><br>
+
+            You are expected to arrive <b>{{ letter.centerOfTheExamination }}</b>, {{ letter.centerOfTheExaminationCountry }}
+             on <b>{{ letter.arrivalDate }}</b> and depart
+              on <b>{{ letter.depatureDate }}</b>. A copy of the examination timetable is 
+              attached.<br><br>
+
+
+            Examiners are required to purchase their return air 
+            ticket no later than
+             two weeks before their arrival for the
+             <b>{{ letter.examination.examName }}</b>. 
+             Refunds wil be processed based on the airline
+             rates applicable two weeks prior to the date 
+             of travel. Kindly submit your flight tickets to:
+             flightticket@wacpcoam.org. <br><br>
+
+            Kindly ensure you continue to fulfil all your 
+            financial obligations to the College(Annual Fellowship Dues 
+            and Building Levy). Please note that for those who are not in good 
+            financial standing, annual dues will be 
+            deducted from the honorarium at source. <br><br>
+
+             
+             {% if letter.hotel != 'nan' %}
+            You will be accommodated at <b> {{ letter.hotel }}</b>.<br><br>
+            {% elif letter.hotel == 'nan' %}
+            
+            {% endif %}
+            As <b>{{ letter.role }}, it is 
+            mandatory to contribute
+             questions to the Examination
+              Bank of the Faculty and
+            ensure prompt return of 
+            assessed proposals.</b><br><br>
+            
+            You are kindly advised not to
+             travel at night for security 
+             reasons.<br><br>
+           <b>NOTE</b>  <br>
+             Kindly indicate your availability via the 
+             email addresses below: ha@wacpcoam.org, goodluckadmin@wacpcoam.org,
+              hodexams@wacpcoam.org, 
+            and copy secgen@wacpcoam.org, 
+            on or before {{ letter.onOrBefore }}. <br><br>
+
+             {% if letter.centerOfTheExamination == 'Ibadan' %}
+           <b>ATTENTION IBADAN EXAMINERS:</b> 
+                As announced by the Nigerian Civil Aviation
+                Authority(NCAA), Ibadan Airport will be out of 
+                service in April 2025 due to a 
+                planned six-month closure for 
+                maintenence and upgrades. We advise examiners 
+                planning to use the airport to make 
+                alternative travel arrangments, including flights 
+                to the nearest airports, with onward 
+                road transportation to Ibadan. The College
+                strongly advises examiners traveling to 
+                Ibadan not to travel past 6pm.
+                {% endif %}<br><br>
+
+            Thank you for your cooperation and support.<br>
+            Dr Musa Dankyau, FWACP, (Fam. Med.)<br>
+            Secretary-General <br><br>
+              </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <img src="https://wacp-coam.org/public/images/letterApp/letterFooter.png"
+                width="900" height="90">
+            </td>
+        </tr>
+        
+    </table>
+
+   
+</body>
+</html>

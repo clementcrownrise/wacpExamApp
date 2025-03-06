@@ -13,29 +13,43 @@
     </script>
 </head>
 <body>
-    <h2>Dear  Dr. {{ letter.surname }} {{ letter.name }},</h2>
-    <p>Please find attached INVITATION LETTER for the {{ letter.examination.examName }},
-        including the Examination Timetable and TOT Flyer for your reference. </p>
-   <p>Please note the following:</p>
+    <h2>Dear  Dr. {{ letter.surname }}
+         {{ letter.name }},</h2>
+    <p>Please find attached INVITATION LETTER 
+        for the 
+        <b>{{ letter.examination.examName }},</b>
+        including the Examination Timetable 
+        for your reference. </p>
+   <p>Please note the following:</p><br>
  
     <p>
-        Please ensure to purchase your return air ticket no later than 2 weeks 
+        Please ensure to purchase your return 
+        air ticket no later than 2 weeks 
         before the date of arrival
         for the {{ letter.examination.examName }}.
-         One-way air ticket bookings may no longer be entertained.
-          Kindly send your flight tickets to: flightticket@wacpcoam.org.
-           (ONLY FOR EXAMINERS TRAVELLING BY AIR)
+        Refunds will be processed based on the airline
+        rates applicable two weeks prior to the date
+        of travel. kindly submmit your flight tickets 
+        to: flightticket@wacpcoam.org.
+
     </p>
+
     <p>
-        An honorarium of N60,000.00 (Sixty Thousand Naira)
-        will be paid to you for each part of the examination
+        An honorarium of N60,000.00 (Sixty
+         Thousand Naira)
+        will be paid to you for each part of 
+        the examination
          in which you fully participate.
     </p>
     <p>
-        You are entitled to a meal allowance of N6,000 (Six Thousand Naira) per weekday and 
-        N12,000 (Twelve Thousand Naira) for weekends.
-        {% if letter.hotel != 'nan' %}
-        YOU ARE ENTITLED TO A WELCOME MEAL ON ARRIVAL AT YOUR HOTEL.
+        You are entitled to a meal allowance
+         of N10,000 (Ten Thousand Naira)
+          per weekday and 
+        N20,000 (Twenty Thousand Naira) 
+        for weekends.
+        {% if letter.hotel != 'nan' %}<br><br>
+        <b>YOU ARE ENTITLED TO A WELCOME MEAL 
+        ON ARRIVAL AT YOUR HOTEL.</b>
         {% elif letter.hotel == 'nan' %}
 
         {% endif %}
@@ -44,7 +58,8 @@
        
 <p>PLEASE ACKNOWLEDGE THIS MAIL AND COPY THE FOLLOWING EMAILS: 
 ha@wacpcoam.org; goodluckadmin@wacpcoam.org; hodexams@wacpcoam.org;
- sanni.jimah@wacpcoam.org; secgen@wacpcoam.org  AND YOUR CHIEF EXAMINER</p>
+ sanni.jimah@wacpcoam.org; secgen@wacpcoam.org  
+ AND YOUR CHIEF EXAMINER</p>
 
 <p>VIRTUAL TOT WORKSHOP WILL HOLD AS FOLLOWS:</p>
  
@@ -57,63 +72,6 @@ Thank you.
     <p>Best Regards, <br> The Team</p>
 
     <br><br><br>
-    <div id="mailholder" style="width: 700px;
-    margin: 20px auto;
-    border: solid 1px skyblue;
-    padding: 20px;
-    border-radius: 1%;
-    text-align: justify;">
-
-              <div style="width: 700px; text-align: center;"> 
-                 <img src="https://wacp-coam.org/images/logo.png" width="300px">
-                </div>
-
-                <br><br>
-        Dr Prof/Dr. <b>{{ letter.surname }} {{ letter.name }}</b>, <br>
-Department of Community Health,<br>
-<b>{{ letter.institutionAddress }}</b><br><br>
-Dear Prof/Dr. <b>{{ letter.name }}</b>,<br><br>
-<b>INVITATION LETTER FOR THE {{letter.examination.examName }}</b><br><br>
-On behalf of the President and Council of the West African College of Physicians (WACP), 
-I have the pleasure of inviting you to serve as <b>{{ letter.role }}</b> for the
-<b>{{letter.examination.examName }}</b>
-of the College. Kindly note: <br><br>
-
-The examinations would hold at the {{ letter.holdAt }}<br><br>
-You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
-<b>{{ letter.faculty }}.</b><br><br>
-You are expected to arrive <b>{{ letter.centerOfTheExamination }}</b>, {{ letter.centerOfTheExaminationCountry }}
- on <b>{{ letter.arrivalDate }}</b> and depart
-  on <b>{{ letter.depatureDate }}</b>. A copy of the examination timetable is 
-  attached.<br><br>
-Please ensure to purchase your return air ticket no later than
- 2 weeks before the date of arrival for the
-<b>{{ letter.examination.examName }}</b>. One-way air ticket
- bookings may no longer be entertained. 
-Please send your flight tickets to: flightticket@wacpcoam.org <br><br>
-{% if letter.hotel != 'nan' %}
-You will be accommodated at <b> {{ letter.hotel }}</b>.<br><br>
-{% elif letter.hotel == 'nan' %}
-
-{% endif %}
-As <b>{{ letter.role }}</b>, it is mandatory to contribute
- questions to the Examination Bank of the Faculty and ensure the 
-prompt return of assessed proposals.<br><br>
-
-You are kindly advised not to travel at night for security reasons.<br>
-NOTE <br>
-a) Kindly indicate your availability via the email addresses below: ha@wacpcoam.org, goodluckadmin@wacpcoam.org, hodexams@wacpcoam.org, 
-and copy secgen@wacpcoam.org, on or before {{ letter.onOrBefore }}. <br><br>
-b) Kindly send your bank account details via email to flightticket@wacpcoam.org for the payment of Examiners’ honoraria.
- (For Nigerian Examiners ONLY).
- <br><br>
-
-Thank you for your cooperation and support.<br>
-Dr Musa Dankyau, FWACP, (Fam. Med.)<br>
-Secretary-General <br><br>
-
-NOTE: Kindly use this link, <a href="https://wacpcoam.org" target="_blank"> https://wacpcoam.org</a>, 
-to update your Fellows database with the College if you are yet to do so.
-    </div>
+   
 </body>
 </html>
