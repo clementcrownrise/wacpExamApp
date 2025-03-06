@@ -7,7 +7,7 @@ class Examination(models.Model):
     examName = models.CharField(max_length=200)
     totTopic = models.CharField(max_length=200)
     totFlyers =models.ImageField(upload_to='uploads/' , blank=True, null=True)
-    totDate = models.CharField()
+    totDate = models.CharField(max_length=200)
     totDetails = models.TextField()
     timetableIbadan = models.FileField(upload_to='uploads/')
     timetableAccra = models.FileField(upload_to='uploads/')
