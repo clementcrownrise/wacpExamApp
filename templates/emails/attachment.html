@@ -19,13 +19,17 @@
             <td width="600px">
                 <div id="mailholder" style="
                 width: 700px;
-                margin: 20px auto;
-                 padding: 10px;
+                
                 text-align: justify;">
             
-            <p style="float: right;">{{ letter.created_at|date:"F d, Y" }}</p><br>
-                         
-                            <br><br>
+           <br>
+              <table width="100%">
+                <tr>
+                    <td><b>Ref: WACP/EXAM/CLINICALS/25A</b></td>
+                    <td><p style="float: right;">{{ letter.created_at|date:"F d, Y" }}</p></td>
+                </tr>
+              </table>           
+                            <br>
                     Dr. <b>{{ letter.surname }} {{ letter.name }}</b>, <br>
             Department of {{ letter.faculty }},<br>
             <b>{{ letter.institutionAddress }}</b><br><br>

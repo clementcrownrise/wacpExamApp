@@ -203,14 +203,11 @@ def sendLetter(request):
     #travelProtocol = 'media/uploads/'
     #totFlyer = 'media/uploads/'
 
-    pdf_files = [examination.timetableAbuja,
-                  examination.timetableAccra, 
-                  examination.timetableIbadan,
-                ]
-    foreign_pdf_files = [examination.timetableAbuja,
-                  examination.timetableAccra, 
-                  examination.timetableIbadan,
-                examination.travelProtocol]
+    abujaTimeTable = examination.timetableAbuja
+    accraTimeTable = examination.timetableAccra
+    ibadanTimeTable = examination.timetableIbadan
+    
+    foreign_pdf_file = examination.travelProtocol
     
 
     
@@ -233,16 +230,33 @@ def sendLetter(request):
             email.attach(f"Invitation_Letter_{letter.surname}.pdf", pdf_file.getvalue(), "application/pdf")
 
         if  letter.InstitutionAddressCountry != letter.countryOfTheExamination:                
-            for foreign_pdf_file in foreign_pdf_files:
                 with open(foreign_pdf_file.path, "rb") as f:
                     email.attach(os.path.basename(foreign_pdf_file.path),
                                   f.read(),
                                   "application/pdf")                
         else:   
+        
+            if letter.centerOfTheExamination.strip().upper() == "ABUJA":
+                with open(abujaTimeTable.path, "rb") as f:
+                    email.attach(os.path.basename(abujaTimeTable.path),
+                                  f.read(), "application/pdf")
+            
+            elif letter.centerOfTheExamination.strip().upper() == "IBADAN":
+                 with open(ibadanTimeTable.path, "rb") as f:
+                    email.attach(os.path.basename(ibadanTimeTable.path),
+                                  f.read(), "application/pdf")
+
+            else:
+                 with open(accraTimeTable.path, "rb") as f:
+                    email.attach(os.path.basename(accraTimeTable.path),
+                                  f.read(), "application/pdf")
+                 
+            """
             for pdf_file in pdf_files:
                 with open(pdf_file.path, "rb") as f:
                     email.attach(os.path.basename(pdf_file.path),
                                   f.read(), "application/pdf")
+            """
         if totFlyer :
             image_path = examination.totFlyers.path
             image_name = examination.totFlyers.name
