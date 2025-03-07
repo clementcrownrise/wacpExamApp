@@ -234,29 +234,24 @@ def sendLetter(request):
                     email.attach(os.path.basename(foreign_pdf_file.path),
                                   f.read(),
                                   "application/pdf")                
-        else:   
+          
         
-            if letter.centerOfTheExamination.strip().upper() == "ABUJA":
+        if letter.centerOfTheExamination.strip().upper() == "ABUJA":
                 with open(abujaTimeTable.path, "rb") as f:
                     email.attach(os.path.basename(abujaTimeTable.path),
                                   f.read(), "application/pdf")
             
-            elif letter.centerOfTheExamination.strip().upper() == "IBADAN":
+        elif letter.centerOfTheExamination.strip().upper() == "IBADAN":
                  with open(ibadanTimeTable.path, "rb") as f:
                     email.attach(os.path.basename(ibadanTimeTable.path),
                                   f.read(), "application/pdf")
 
-            else:
+        else:
                  with open(accraTimeTable.path, "rb") as f:
                     email.attach(os.path.basename(accraTimeTable.path),
                                   f.read(), "application/pdf")
                  
-            """
-            for pdf_file in pdf_files:
-                with open(pdf_file.path, "rb") as f:
-                    email.attach(os.path.basename(pdf_file.path),
-                                  f.read(), "application/pdf")
-            """
+       
         if totFlyer :
             image_path = examination.totFlyers.path
             image_name = examination.totFlyers.name

@@ -19,7 +19,7 @@ class ExamForm(forms.ModelForm):
         widgets = {
            # 'TotDate': forms.DateInput(attrs={'type': 'date'}),
             'totDetails': CKEditor5Widget(
-                attrs={"class":"django_ckeditor_5"}, config_name= "comment"
+                attrs={"class":"django_ckeditor_5"}, config_name= "extends"
             )
             #'timetableIbadan':forms.ClearableFileInput(attrs={'type': 'form-control'}),
             #'timetableAccra':forms.ClearableFileInput(attrs={'type': 'form-control'}),
