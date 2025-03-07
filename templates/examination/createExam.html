@@ -1,4 +1,5 @@
 {% extends 'examination/base.html' %} 
+{{ form.media }} # Required for styling/js to make ckeditor5 work   
 
 {% block title %} Create Examination {% endblock %}
 
@@ -16,11 +17,6 @@
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-
-   
-
-
-
     {{ form.as_p }}
     <button type="submit" class="form-control btn btn-primary">Save</button>
 </form>

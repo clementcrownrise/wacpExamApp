@@ -2,19 +2,25 @@ from django import forms
 import datetime
 from .models import Examination
 from django.forms.widgets import DateInput
-
+from django_ckeditor_5.widgets import CKEditor5Widget
 #class DateInput(forms.DateInput):
 #    input_type = 'date'
 
 
-
 class ExamForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+          super().__init__(*args, **kwargs)
+          self.fields["totDetails"].required = False
+
+
     class Meta:
         model = Examination
         fields = "__all__"
         widgets = {
-            'TotDate': forms.DateInput(attrs={'type': 'date'}),
-           # 'totFlyer': forms.ClearableFileInput(attrs={'type': 'form-control'}),
+           # 'TotDate': forms.DateInput(attrs={'type': 'date'}),
+            'totDetails': CKEditor5Widget(
+                attrs={"class":"django_ckeditor_5"}, config_name= "comment"
+            )
             #'timetableIbadan':forms.ClearableFileInput(attrs={'type': 'form-control'}),
             #'timetableAccra':forms.ClearableFileInput(attrs={'type': 'form-control'}),
             #'timetableAbuja':forms.ClearableFileInput(attrs={'type': 'form-control'}),

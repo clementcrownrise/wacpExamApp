@@ -34,5 +34,6 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(authentication_form=LoginForm,template_name='examLetter/login.html')),
     path('logout/', views.logout_view, name='logout'),  
     path("examination/", include("examination.urls")),
-    path("letter/", include("letter.urls"))
+    path("letter/", include("letter.urls")),
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

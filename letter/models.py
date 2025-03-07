@@ -9,6 +9,7 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
+
 # Create your models here.
 class Letter(TimeStampedModel):
     examination = models.ForeignKey(Examination, on_delete=models.CASCADE,related_name='letters')
