@@ -80,10 +80,15 @@ def upload_excel(request):
             excel_file = request.FILES['file']
             requestedExaminationId = request.POST.get('examination')
             #i willl read excel file now
-            df = pd.read_excel(excel_file)
-
+            df = pd.read_excel(excel_file, dtype=str, keep_default_na=False)
+            df.columns = df.columns.str.strip()  # Remove unwanted spaces
+            df["ArrivalDate"] = df["ArrivalDate"].astype(str)
+            df["DepatureDate"] = df["DepatureDate"].astype(str)
+          
             #iterate thrrough rows
             for _, row in df.iterrows():
+                arrival_date = str(row['ArrivalDate']).strip()
+                depature_date = str(row['DepatureDate']).strip()
                 Letter.objects.create(
                     examination_id = requestedExaminationId,
                     surname=row['Surname'],
@@ -95,8 +100,8 @@ def upload_excel(request):
                     centerOfTheExamination = row['CenterOfTheExamination'],
                     meal = row['Meal'],
                     cc = row['CC'],
-                    arrivalDate = row['ArrivalDate'],
-                    depatureDate = row['DepatureDate'],
+                    arrivalDate=arrival_date,  # Explicitly save as a string
+                    depatureDate=depature_date, 
                     email = row['Email'],
                     faculty = row['Faculty'],
                     onOrBefore = row['OnOrBefore'],

@@ -47,10 +47,10 @@
           per weekday and 
         N20,000 (Twenty Thousand Naira) 
         for weekends.
-        {% if letter.hotel != 'nan' %}<br><br>
+        {% if letter.hotel|lower != 'no hotel' %}<br><br>
         <b>YOU ARE ENTITLED TO A WELCOME MEAL 
         ON ARRIVAL AT YOUR HOTEL.</b>
-        {% elif letter.hotel == 'NO HOTEL' %}
+        {% elif letter.hotel|lower == 'no hotel' %}
 
         {% endif %}
     </p>
@@ -65,7 +65,7 @@ ha@wacpcoam.org; goodluckadmin@wacpcoam.org; hodexams@wacpcoam.org;
  
 <p><b>TOPIC: </b>   {{ letter.examination.totTopic }}</p>
 <p> <b>DATE: </b>   {{ letter.examination.totDate }}</p> 
-<p></b> {{ letter.examination.totDetails|safe }}</p>
+<p> {{ letter.examination.totDetails|safe }}</p>
  
 Thank you.
 

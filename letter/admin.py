@@ -4,7 +4,8 @@ from .models import Letter
 # Register your models here.
 @admin.register(Letter)
 class LetterAdmin(admin.ModelAdmin):
-        list_display = ["examination","surname","name","institutionAddress","email"]
+        list_display = ["examination","surname","name",
+                        "institutionAddress","email","arrivalDate","depatureDate"]
 
         #def examName(self,obj):
         #    return obj.letter.examName

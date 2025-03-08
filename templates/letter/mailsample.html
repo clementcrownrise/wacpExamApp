@@ -69,10 +69,10 @@ text-align: justify;">
             </div>
 
             <br><br>
-     Dr. <b>{{ letter.surname }} {{ letter.name }}</b>, <br>
+    <b> Dr. {{ letter.surname }} {{ letter.name }}</b>, <br>
 Department of Community Health,<br>
 <b>{{ letter.institutionAddress }}</b><br><br>
-Dear Dr. <b>{{ letter.name }}</b>,<br><br>
+<b>Dear Dr. {{ letter.name }}</b>,<br><br>
 <b>INVITATION LETTER FOR THE {{letter.examination.examName }}</b><br><br>
 On behalf of the President and Council of the West African College of Physicians (WACP), 
 I have the pleasure of inviting you to serve as <b>{{ letter.role }}</b> for the
@@ -90,7 +90,7 @@ Please ensure to purchase your return air ticket no later than 2 weeks before th
 <b>{{ letter.examination.examName }}</b>. 
 One-way air ticket bookings may no longer be entertained. 
 Please send your flight tickets to: flightticket@wacpcoam.org <br><br>
-{% if letter.hotel != 'nan' %}
+{% if letter.hotel|lower != 'no hotel' %}
 You will be accommodated at  <b>{{ letter.hotel }}</b>.<br><br>
 {% elif letter.hotel == 'nan' %}
 

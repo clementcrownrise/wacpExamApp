@@ -67,7 +67,7 @@
             deducted from the honorarium at source. <br><br>
 
              
-             {% if letter.hotel != 'nan' %}
+             {% if letter.hotel|lower != 'no hotel' %}
             You will be accommodated at <b> {{ letter.hotel }}</b>.<br><br>
             {% elif letter.hotel == 'NO HOTEL' %}
             

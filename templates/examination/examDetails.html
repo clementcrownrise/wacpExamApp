@@ -74,7 +74,9 @@
       <th scope="col">Institution Address</th>
       <th scope="col">Faculty</th>
       <th scope="col">Examination Center</th>
-          <th scope="col">Email</th>
+      <th scope="col">Arrival Date</th>
+      <th scope="col">Departure Date</th>
+      <th scope="col">Email</th>
    </tr>
   </thead>
   <tbody>
@@ -86,6 +88,8 @@
       <td>{{ letter.institutionAddress }}</td>
       <td>{{ letter.faculty }}</td>
       <td>{{ letter.centerOfTheExamination }}</td>
+      <td>{{ letter.arrivalDate }}</td>
+      <td>{{ letter.depatureDate }}</td>
           <td>{{ letter.email }}</td>
       <td>
         <a href="{% url 'letter:details' letter.id  %}"> 

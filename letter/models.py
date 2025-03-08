@@ -27,8 +27,8 @@ class Letter(TimeStampedModel):
     holdAt  = models.CharField(max_length=200, default='')
     InstitutionAddressCountry  = models.CharField(max_length=300, default='')
     faculty  = models.CharField(max_length=200, default='')
-    arrivalDate = models.CharField(max_length=200)
-    depatureDate = models.CharField(max_length=200)
+    arrivalDate = models.CharField(max_length=20, default='')
+    depatureDate = models.CharField(max_length=20, default='')
     email = models.CharField(max_length=60)
     
 
