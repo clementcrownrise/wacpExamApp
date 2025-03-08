@@ -26,14 +26,14 @@
               <table width="100%">
                 <tr>
                     <td><b>Ref: WACP/EXAM/CLINICALS/25A</b></td>
-                    <td><p style="float: right;">{{ letter.created_at|date:"F d, Y" }}</p></td>
+                    <td width="20%"><p style="float: right;">{{ letter.created_at|date:"F d, Y" }}</p></td>
                 </tr>
               </table>           
                             <br>
-                    Dr. <b>{{ letter.surname }} {{ letter.name }}</b>, <br>
+                    <b>Dr. {{ letter.surname }} {{ letter.name }}</b>, <br>
             Department of {{ letter.faculty }},<br>
             <b>{{ letter.institutionAddress }}</b><br><br>
-            Dear Dr. <b>{{ letter.name }}</b>,<br><br>
+            <b>Dear Dr. {{ letter.name }}</b>,<br><br>
             <b>INVITATION LETTER FOR THE {{letter.examination.examName }}</b><br><br>
             On behalf of the President and Council of the West African College of Physicians (WACP), 
             I have the pleasure of inviting you to serve as <b>{{ letter.role }}</b> for the
