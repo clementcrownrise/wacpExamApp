@@ -234,7 +234,7 @@ def sendLetter(request):
         if pdf_file:
             email.attach(f"Invitation_Letter_{letter.surname}.pdf", pdf_file.getvalue(), "application/pdf")
 
-        if  letter.InstitutionAddressCountry != letter.countryOfTheExamination:                
+        if  letter.InstitutionAddressCountry.strip().lower() != letter.countryOfTheExamination.strip().lower():                
                 with open(foreign_pdf_file.path, "rb") as f:
                     email.attach(os.path.basename(foreign_pdf_file.path),
                                   f.read(),
