@@ -39,7 +39,7 @@ def index(request):
                 letters = Letter.objects.filter(Q(examination_id = examination)
                                          & Q(faculty__icontains=faculty))
                 #return HttpResponse(faculty)
-                paginator = Paginator(letters, 20)
+                paginator = Paginator(letters, 50)
                 page_number = request.GET.get("page")
                 page_obj = paginator.get_page(page_number) 
                 

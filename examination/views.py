@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from . models import Examination
@@ -34,16 +34,27 @@ def index(request):
 def exam_details(request, examination_id):
     faculties = Faculty.objects.all()
     examination = get_object_or_404(Examination, id=examination_id)
-    #letters = examination.letters.all()
-    letters = Letter.objects.filter(examination_id = examination_id)
-    paginator = Paginator(letters, 20)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
 
-    return render(request, "examination/examDetails.html",{'examination':examination,
-                                                            'letters':letters,
-                                                              'page_obj': page_obj,
-                                                               'faculties':faculties })
+    # Get letters related to the examination
+    letters = Letter.objects.filter(examination_id=examination_id)
+
+    # Paginate the letters (20 per page)
+    paginator = Paginator(letters, 50)
+    page_number = request.GET.get("page")
+
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)  # If page is not an integer, show first page
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)  # If out of range, show last page
+
+    return render(request, "examination/examDetails.html", {
+        'examination': examination,
+        'page_obj': page_obj,  # Pass only paginated data
+        'faculties': faculties
+    })
+
 @login_required
 def deleteExam(request, examination_id):
     examination = get_object_or_404(Examination, id=examination_id)

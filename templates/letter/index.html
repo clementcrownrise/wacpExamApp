@@ -49,7 +49,7 @@ class="d-flex justify-content-between gap:10px">
    </tr>
   </thead>
   <tbody>
-      {% for letter in letters %}
+      {% for letter in page_obj %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
       <td>{{ letter.surname }}</td>
