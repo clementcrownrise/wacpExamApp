@@ -219,13 +219,17 @@ def sendLetter(request):
     for letter in letters:
         html_message = render_to_string("emails/letter_template.html", {"letter": letter})
         plain_message = strip_tags(html_message)  # Remove HTML for plain text version
-         
+
+        if letter.email:
+        # Split emails by semicolon and remove extra spaces
+            recipient_list = [email.strip() for email in letter.email.split(";") if email.strip()]
+    
 
         email = EmailMultiAlternatives(
             subject,
             plain_message,  # Plain text content
             request.user.username or "adeyemi.tosin@wacpcoam.org" , # Or any other valid email
-            [letter.email],  # Recipient list
+            recipient_list,  # Recipient list
         )
         email.attach_alternative(html_message, "text/html")  # Attach HTML content
 

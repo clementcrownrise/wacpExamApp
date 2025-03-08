@@ -76,7 +76,7 @@
       <th scope="col">Examination Center</th>
       <th scope="col">Arrival Date</th>
       <th scope="col">Departure Date</th>
-      <th scope="col">Email</th>
+      <th scope="col" width="100px">Email</th>
    </tr>
   </thead>
   <tbody>
@@ -90,7 +90,7 @@
       <td>{{ letter.centerOfTheExamination }}</td>
       <td>{{ letter.arrivalDate }}</td>
       <td>{{ letter.depatureDate }}</td>
-          <td>{{ letter.email }}</td>
+      <td width="100px">{{ letter.email }}</td>
       <td>
         <a href="{% url 'letter:details' letter.id  %}"> 
           <button class="btn btn-dark">View </button></a>
