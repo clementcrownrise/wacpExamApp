@@ -79,6 +79,14 @@ I have the pleasure of inviting you to serve as <b>{{ letter.role }}</b> for the
 <b>{{letter.examination.examName }}</b>
 of the College. Kindly note: <br><br>
 
+{% if letter.role|lower == 'chief examiner' %}
+<p> 
+ You will receive a payment of N75,000.00 (Seventy-Five Thousand Naira) for
+  pre-examination preparations.
+ 
+ </p>
+     {% endif %}
+
 The examinations would hold at the {{ letter.holdAt }}<br><br>
 You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
 <b>{{ letter.faculty }}.</b><br><br>

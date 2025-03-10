@@ -44,12 +44,24 @@
             
             You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
             <b>{{ letter.faculty }}.</b><br><br>
-
+            {% if letter.role|lower == 'chief examiner' %}
+            <p>
+            You are expected to arrive in Lagos, Nigeria, for 
+            collation on Friday, April 4, 2025, and proceed to your
+             examination centre on 
+             Tuesday, April 8, 2025. 
+             Departure from the examination centre is scheduled 
+             between April 15 and April 16, 2025. 
+             A copy of the examination timetable is attached.
+           </p>
+            {% elif letter.role|lower != 'chief examiner' %}
+           <p>
             You are expected to arrive <b>{{ letter.centerOfTheExamination }}</b>, {{ letter.centerOfTheExaminationCountry }}
              on <b>{{ letter.arrivalDate }}</b> and depart
               on <b>{{ letter.depatureDate }}</b>. A copy of the examination timetable is 
               attached.<br><br>
-
+            </p>
+            {% endif %}
 
             Examiners are required to purchase their return air 
             ticket no later than
@@ -59,13 +71,13 @@
              rates applicable two weeks prior to the date 
              of travel. Kindly submit your flight tickets to:
              flightticket@wacpcoam.org. <br><br>
-
+            {% if letter.role|lower != 'chief examiner' %}
             Kindly ensure you continue to fulfil all your 
             financial obligations to the College(Annual Fellowship Dues 
             and Building Levy). Please note that for those who are not in good 
             financial standing, annual dues will be 
             deducted from the honorarium at source. <br><br>
-
+            {% endif %}
              
              {% if letter.hotel|lower != 'no hotel' %}
             You will be accommodated at <b> {{ letter.hotel }}</b>.<br><br>

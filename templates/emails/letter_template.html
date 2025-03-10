@@ -21,7 +21,13 @@
         including the Examination Timetable 
         for your reference. </p>
    <p>Please note the following:</p>
- 
+        {% if letter.role|lower == 'chief examiner' %}
+   <p> 
+    You will receive a payment of N75,000.00 (Seventy-Five Thousand Naira) for
+     pre-examination preparations.
+    
+    </p>
+        {% endif %}
     <p>
         Please ensure to purchase your return 
         air ticket no later than 2 weeks 
