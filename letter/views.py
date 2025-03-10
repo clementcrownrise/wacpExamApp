@@ -224,12 +224,18 @@ def sendLetter(request):
         # Split emails by semicolon and remove extra spaces
             recipient_list = [email.strip() for email in letter.email.split(";") if email.strip()]
     
-
+        cc = ['ha@wacpcoam.org', 'goodluckadmin@wacpcoam.org',
+        ' hodexams@wacpcoam.org', 
+          ' sanni.jimah@wacpcoam.org',
+             'flightticket@wacpcoam.org',
+              ' secgen@wacpcoam.org'
+               ]
         email = EmailMultiAlternatives(
             subject,
             plain_message,  # Plain text content
             request.user.username or "adeyemi.tosin@wacpcoam.org" , # Or any other valid email
             recipient_list,  # Recipient list
+            cc, #this is copy
         )
         email.attach_alternative(html_message, "text/html")  # Attach HTML content
 
