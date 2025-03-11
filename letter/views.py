@@ -214,10 +214,33 @@ def sendLetter(request):
     
     foreign_pdf_file = examination.travelProtocol
     
-
+    exco_list = [
+         'mmka@refer.sn',
+    'mmka@univ-thies.sn',
+    'mmourtalla@gmail.com',
+    'dankyausgwacp@gmail.com',
+    'barbiejoe64@yahoo.com',
+    'hagaladanci@yahoo.com',
+    'owusua@doctor.com',
+    'macauleyr@gmail.com',
+    'wachinouprudence@yahoo.fr',
+    'wachinousgwacp.com',
+    'deiadom@yahoo.com',
+    'malomo2264@yahoo.com',
+    'gbengaogunfowokan@gmail.com',
+    'wadgashau@gmail.com',
+    'abomotoso@hotmail.com',
+    'aboomotoso@gmail.com',
+    'a_akpalu@yahoo.com',
+    'aofili13@yahoo.com',
+    'drgbenga10@gmail.com',
+    'latshe@yahoo.com',
+    'bibideji@yahoo.com',
+    'ekwiredu@uhas.edu.gh'
+    ]
     
     for letter in letters:
-        html_message = render_to_string("emails/letter_template.html", {"letter": letter})
+        html_message = render_to_string("emails/letter_template.html", {"letter": letter,"exco_list":exco_list})
         plain_message = strip_tags(html_message)  # Remove HTML for plain text version
 
         if letter.email:

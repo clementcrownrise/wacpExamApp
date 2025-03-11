@@ -44,7 +44,7 @@
             
             You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
             <b>{{ letter.faculty }}.</b><br><br>
-            {% if letter.role|lower == 'chief examiner' %}
+            {% if letter.role|lower == 'chief examiner' or letter.email in exco_list %}
             <p>
             You are expected to arrive in Lagos, Nigeria, for 
             collation on Friday, April 4, 2025, and proceed to your
