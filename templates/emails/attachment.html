@@ -42,8 +42,10 @@
             
             The examinations would hold at the {{ letter.holdAt }}<br><br>
             
-            You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
+            You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> 
+            Examination of the Faculty of 
             <b>{{ letter.faculty }}.</b><br><br>
+
             {% if letter.role|lower == 'chief examiner' or letter.email in exco_list %}
             <p>
             You are expected to arrive in Lagos, Nigeria, for 
@@ -54,7 +56,7 @@
              between April 15 and April 16, 2025. 
              A copy of the examination timetable is attached.
            </p>
-            {% elif letter.role|lower != 'chief examiner' %}
+            {% elif letter.role|lower != 'chief examiner' and letter.centerOfTheExamination|lower != 'online' %}
            <p>
             You are expected to arrive <b>{{ letter.centerOfTheExamination }}</b>, {{ letter.centerOfTheExaminationCountry }}
              on <b>{{ letter.arrivalDate }}</b> and depart
@@ -63,6 +65,7 @@
             </p>
             {% endif %}
 
+            {% if letter.centerOfTheExamination|lower != 'online' %}
             Examiners are required to purchase their return air 
             ticket no later than
              two weeks before their arrival for the
@@ -71,6 +74,8 @@
              rates applicable two weeks prior to the date 
              of travel. Kindly submit your flight tickets to:
              flightticket@wacpcoam.org. <br><br>
+            {% endif %}
+
             {% if letter.role|lower != 'chief examiner' %}
             Kindly ensure you continue to fulfil all your 
             financial obligations to the College(Annual Fellowship Dues 
@@ -90,10 +95,12 @@
               Bank of the Faculty and
             ensure prompt return of 
             assessed proposals.</b><br><br>
-            
+            {% if letter.centerOfTheExamination|lower != 'online' %}
             You are kindly advised not to
              travel at night for security 
              reasons.<br><br>
+
+            {% endif %}
            <b>NOTE</b>  <br>
              Kindly indicate your availability via the 
              email addresses below: ha@wacpcoam.org, goodluckadmin@wacpcoam.org,
@@ -101,7 +108,7 @@
             and copy secgen@wacpcoam.org, 
             on or before {{ letter.onOrBefore }}. <br><br>
 
-             {% if letter.centerOfTheExamination == 'Ibadan' %}
+             {% if letter.centerOfTheExamination|lower == 'ibadan' %}
            <b>ATTENTION IBADAN EXAMINERS:</b> 
                 As announced by the Nigerian Civil Aviation
                 Authority(NCAA), Ibadan Airport will be out of 

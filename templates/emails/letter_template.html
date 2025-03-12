@@ -28,7 +28,8 @@
     
     </p>
         {% endif %}
-    <p>
+        {% if letter.centerOfTheExamination|lower != 'online' %}
+        <p>
         Please ensure to purchase your return 
         air ticket no later than 2 weeks 
         before the date of arrival
@@ -39,6 +40,7 @@
         to: flightticket@wacpcoam.org.
 
     </p>
+    {% endif %}
 
     <p>
         An honorarium of N60,000.00 (Sixty

@@ -246,19 +246,18 @@ def sendLetter(request):
         if letter.email:
         # Split emails by semicolon and remove extra spaces
             recipient_list = [email.strip() for email in letter.email.split(";") if email.strip()]
-    
-        cc = ['ha@wacpcoam.org', 'goodluckadmin@wacpcoam.org',
+            bcc =['ha@wacpcoam.org', 'goodluckadmin@wacpcoam.org',
         ' hodexams@wacpcoam.org', 
           ' sanni.jimah@wacpcoam.org',
              'flightticket@wacpcoam.org',
-              ' secgen@wacpcoam.org'
-               ]
+              ' secgen@wacpcoam.org']
+       
         email = EmailMultiAlternatives(
             subject,
             plain_message,  # Plain text content
             request.user.username or "adeyemi.tosin@wacpcoam.org" , # Or any other valid email
             recipient_list,  # Recipient list
-            cc, #this is copy
+            bcc = bcc
         )
         email.attach_alternative(html_message, "text/html")  # Attach HTML content
 
@@ -282,6 +281,17 @@ def sendLetter(request):
         elif letter.centerOfTheExamination.strip().upper() == "IBADAN":
                  with open(ibadanTimeTable.path, "rb") as f:
                     email.attach(os.path.basename(ibadanTimeTable.path),
+                                  f.read(), "application/pdf")
+
+        elif letter.centerOfTheExamination.strip().upper() == "ONLINE":
+                 with open(ibadanTimeTable.path, "rb") as f:
+                    email.attach(os.path.basename(ibadanTimeTable.path),
+                                  f.read(), "application/pdf")
+                 with open(abujaTimeTable.path, "rb") as f:
+                    email.attach(os.path.basename(abujaTimeTable.path),
+                                  f.read(), "application/pdf")
+                 with open(accraTimeTable.path, "rb") as f:
+                    email.attach(os.path.basename(accraTimeTable.path),
                                   f.read(), "application/pdf")
 
         else:

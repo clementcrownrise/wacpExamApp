@@ -90,14 +90,22 @@ of the College. Kindly note: <br><br>
 The examinations would hold at the {{ letter.holdAt }}<br><br>
 You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> Examination of the Faculty of 
 <b>{{ letter.faculty }}.</b><br><br>
+{% if letter.centerOfTheExamination|lower != 'online' %}
 You are expected to arrive <b>{{ letter.centerOfTheExamination }}, 
 {{ letter.countryOfTheExamination }}</b>
+
 on <b>{{ letter.arrivalDate }}</b> and depart on <b>{{ letter.depatureDate }}</b>. 
+{% endif %}
 A copy of the examination timetable is attached.<br><br>
+
+{% if letter.centerOfTheExamination|lower != 'online' %}
+
 Please ensure to purchase your return air ticket no later than 2 weeks before the date of arrival for the
 <b>{{ letter.examination.examName }}</b>. 
 One-way air ticket bookings may no longer be entertained. 
 Please send your flight tickets to: flightticket@wacpcoam.org <br><br>
+{% endif %}
+
 {% if letter.hotel|lower != 'no hotel' %}
 You will be accommodated at  <b>{{ letter.hotel }}</b>.<br><br>
 {% elif letter.hotel == 'nan' %}
@@ -105,15 +113,19 @@ You will be accommodated at  <b>{{ letter.hotel }}</b>.<br><br>
 {% endif %}
 As <b>{{ letter.role }}</b>, it is mandatory to contribute questions to the Examination Bank of the Faculty and ensure the 
 prompt return of assessed proposals.<br><br>
+{% if letter.centerOfTheExamination|lower != 'online' %}
+
 You are kindly advised not to travel at night for security reasons.<br>
+{% endif %}
 NOTE <br>
 a) Kindly indicate your availability via the email addresses below: ha@wacpcoam.org,
  goodluckadmin@wacpcoam.org, hodexams@wacpcoam.org, 
 and copy secgen@wacpcoam.org, on or before {{ letter.onOrBefore }}. <br><br>
+{% if letter.centerOfTheExamination|lower != 'online' %}
 b) Kindly send your bank account details via email to flightticket@wacpcoam.org for the payment of Examiners’ honoraria.
 (For Nigerian Examiners ONLY).
 <br><br>
-
+{% endif %}
 Thank you for your cooperation and support.<br>
 Dr Musa Dankyau, FWACP, (Fam. Med.)<br>
 Secretary-General <br><br>
