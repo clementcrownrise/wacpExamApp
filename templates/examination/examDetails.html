@@ -71,12 +71,12 @@
       <th scope="col">#</th>
       <th scope="col">Surname</th>
       <th scope="col">Name</th>
-      <th scope="col">Institution Address</th>
       <th scope="col">Faculty</th>
       <th scope="col">Examination Center</th>
       <th scope="col">Arrival Date</th>
       <th scope="col">Departure Date</th>
       <th scope="col" width="100px">Email</th>
+      <th scope="col" width="100px">User Type</th>
    </tr>
   </thead>
   <tbody>
@@ -85,12 +85,12 @@
       <th scope="row">{{ forloop.counter }}</th>
       <td>{{ letter.surname }}</td>
       <td>{{ letter.name }}</td>
-      <td>{{ letter.institutionAddress }}</td>
       <td>{{ letter.faculty }}</td>
       <td>{{ letter.centerOfTheExamination }}</td>
       <td>{{ letter.arrivalDate }}</td>
       <td>{{ letter.depatureDate }}</td>
       <td width="100px">{{ letter.email }}</td>
+      <td width="100px">{{ letter.userType }}</td>
       <td>
         <a href="{% url 'letter:details' letter.id  %}"> 
           <button class="btn btn-dark">View </button></a>

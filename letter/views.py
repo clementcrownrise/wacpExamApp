@@ -108,7 +108,7 @@ def upload_excel(request):
                     holdAt = row['HoldAt'],
                     countryOfTheExamination = row['CountryOfTheExamination'],
                     InstitutionAddressCountry = row['InstitutionAddressCountry'],
-
+                    userType = row['UserType'],
                 )
             #return HttpResponse('Data Imported Successfully!')
             messages.success(request, "Records successfully imported")  
@@ -214,33 +214,10 @@ def sendLetter(request):
     
     foreign_pdf_file = examination.travelProtocol
     
-    exco_list = [
-         'mmka@refer.sn',
-    'mmka@univ-thies.sn',
-    'mmourtalla@gmail.com',
-    'dankyausgwacp@gmail.com',
-    'barbiejoe64@yahoo.com',
-    'hagaladanci@yahoo.com',
-    'owusua@doctor.com',
-    'macauleyr@gmail.com',
-    'wachinouprudence@yahoo.fr',
-    'wachinousgwacp.com',
-    'deiadom@yahoo.com',
-    'malomo2264@yahoo.com',
-    'gbengaogunfowokan@gmail.com',
-    'wadgashau@gmail.com',
-    'abomotoso@hotmail.com',
-    'aboomotoso@gmail.com',
-    'a_akpalu@yahoo.com',
-    'aofili13@yahoo.com',
-    'drgbenga10@gmail.com',
-    'latshe@yahoo.com',
-    'bibideji@yahoo.com',
-    'ekwiredu@uhas.edu.gh'
-    ]
-    
+        
     for letter in letters:
-        html_message = render_to_string("emails/letter_template.html", {"letter": letter,"exco_list":exco_list})
+       
+        html_message = render_to_string("emails/letter_template.html", {"letter": letter})
         plain_message = strip_tags(html_message)  # Remove HTML for plain text version
 
         if letter.email:
@@ -262,6 +239,8 @@ def sendLetter(request):
         email.attach_alternative(html_message, "text/html")  # Attach HTML content
 
         #i attached the generated guys here
+       
+
         pdf_file = generate_pdf(letter)
         if pdf_file:
             email.attach(f"Invitation_Letter_{letter.surname}.pdf", pdf_file.getvalue(), "application/pdf")

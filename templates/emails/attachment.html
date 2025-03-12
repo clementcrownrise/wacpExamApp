@@ -33,7 +33,7 @@
                     <b>Dr. {{ letter.surname }} {{ letter.name }}</b>, <br>
             Department of {{ letter.faculty }},<br>
             <b>{{ letter.institutionAddress }}</b><br><br>
-            <b>Dear Dr. {{ letter.name }}</b>,<br><br>
+            <b>Dear Dr. {{ letter.surname }}</b>,<br><br>
             <b>INVITATION LETTER FOR THE {{letter.examination.examName }}</b><br><br>
             On behalf of the President and Council of the West African College of Physicians (WACP), 
             I have the pleasure of inviting you to serve as <b>{{ letter.role }}</b> for the
@@ -45,25 +45,29 @@
             You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> 
             Examination of the Faculty of 
             <b>{{ letter.faculty }}.</b><br><br>
+          {% if letter.role|lower == 'chief examiner' or  letter.userType|lower == 'exco'  %}
+                        <p>
+                       <b> You are expected to arrive in Lagos, Nigeria, for 
+                        collation on Friday, April 4, 2025, and proceed to your
+                        examination centre on 
+                        Tuesday, April 8, 2025. 
+                        Departure from the examination centre is scheduled 
+                        between April 15 and April 16, 2025. <br><br>
+                        A copy of the examination timetable is attached.<br> 
+                        Accommodation in Lagos is Amber Residence, Ikeja GRA, Lagos.
+                      </b>
+                      </p>
+          {% endif %}
 
-            {% if letter.role|lower == 'chief examiner' or letter.email in exco_list %}
-            <p>
-            You are expected to arrive in Lagos, Nigeria, for 
-            collation on Friday, April 4, 2025, and proceed to your
-             examination centre on 
-             Tuesday, April 8, 2025. 
-             Departure from the examination centre is scheduled 
-             between April 15 and April 16, 2025. 
-             A copy of the examination timetable is attached.
-           </p>
-            {% elif letter.role|lower != 'chief examiner' and letter.centerOfTheExamination|lower != 'online' %}
+            {% if letter.role|lower != 'chief examiner' and letter.centerOfTheExamination|lower != 'online' and letter.userType|lower != 'exco'  %}
            <p>
             You are expected to arrive <b>{{ letter.centerOfTheExamination }}</b>, {{ letter.centerOfTheExaminationCountry }}
              on <b>{{ letter.arrivalDate }}</b> and depart
               on <b>{{ letter.depatureDate }}</b>. A copy of the examination timetable is 
               attached.<br><br>
             </p>
-            {% endif %}
+                
+             {% endif %}
 
             {% if letter.centerOfTheExamination|lower != 'online' %}
             Examiners are required to purchase their return air 
@@ -85,7 +89,7 @@
             {% endif %}
              
              {% if letter.hotel|lower != 'no hotel' %}
-            You will be accommodated at <b> {{ letter.hotel }}</b>.<br><br>
+            You will be accommodated in <b>{{ letter.centerOfTheExamination }}</b>, at <b> {{ letter.hotel }}</b>.<br><br>
             {% elif letter.hotel == 'NO HOTEL' %}
             
             {% endif %}
@@ -108,7 +112,7 @@
             and copy secgen@wacpcoam.org, 
             on or before {{ letter.onOrBefore }}. <br><br>
 
-             {% if letter.centerOfTheExamination|lower == 'ibadan' %}
+             {% if letter.centerOfTheExamination|lower == 'ibadan' and letter.userType|lower != 'exco' %}
            <b>ATTENTION IBADAN EXAMINERS:</b> 
                 As announced by the Nigerian Civil Aviation
                 Authority(NCAA), Ibadan Airport will be out of 

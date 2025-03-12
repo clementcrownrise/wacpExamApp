@@ -30,6 +30,7 @@ class Letter(TimeStampedModel):
     arrivalDate = models.CharField(max_length=20, default='')
     depatureDate = models.CharField(max_length=20, default='')
     email = models.CharField(max_length=200)
+    userType = models.CharField(max_length=200, default='')
     
 
     def __str__(self):
