@@ -224,10 +224,11 @@ def sendLetter(request):
         # Split emails by semicolon and remove extra spaces
             recipient_list = [email.strip() for email in letter.email.split(";") if email.strip()]
             bcc =['ha@wacpcoam.org', 'goodluckadmin@wacpcoam.org',
-        ' hodexams@wacpcoam.org', 
-          ' sanni.jimah@wacpcoam.org',
+        'hodexams@wacpcoam.org', 
+          'sanni.jimah@wacpcoam.org',
              'flightticket@wacpcoam.org',
-              ' secgen@wacpcoam.org']
+             'clementcrownrise@gmail.com',
+               'secgen@wacpcoam.org']
        
         email = EmailMultiAlternatives(
             subject,
