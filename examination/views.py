@@ -18,7 +18,6 @@ def selected(request):
         return render(request, "examination/examDetails.html", {'results': results})
 
 
-
 @login_required
 def index(request):
     #return HttpResponse("All created exams would be listed here")

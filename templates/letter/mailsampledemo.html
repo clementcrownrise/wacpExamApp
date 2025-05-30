@@ -1,0 +1,335 @@
+{% extends 'examination/base.html' %} 
+
+{% block title %} Letter {% endblock %}
+
+{% block pagetitle %} 
+<div class="d-flex justify-content-between align-items-center">
+    <h4>Details for: <b>{{letter.surname}}, {{ letter.name }}</b></h4> 
+ <a class="btn btn-primary"
+  href="{% url 'letter:index' %}">Back</a>
+  
+ </div>
+{%  endblock %}
+
+{% block body %}
+
+<h2>Dear  Dr. {{ letter.surname }} {{ letter.name }},</h2>
+<p>Please find attached INVITATION LETTER for the {{ letter.examination.examName }},
+    including the Examination Timetable and TOT Flyer for your reference. </p>
+<p>Please note the following:</p>
+
+
+<!-- THIS IS FOR EXCOS AND CE -->
+{% if letter.role|lower != 'examiner' %}
+
+              <!-- ghanas that are not examiners start here -->
+
+                  <!-- for examiners in ghana start here -->
+              {% if letter.countryOfTheExamination|lower == 'ghana' or letter.InstitutionAddressCountry == 'ghana' %}
+
+     <ul>
+
+        <ol>An honorarium of $50.00 (Fifty US Dollars) will be paid to you for each part of the examination in which you fully participate.
+</ol><br>
+        <ol>
+     You are entitled to a meal allowance of GH300.00 (Three Hundred Ghana Cedis) per day.
+
+        </ol><br>
+     </ul>
+              <br>  
+<p>PLEASE ACKNOWLEDGE THIS MAIL AND COPY THE FOLLOWING EMAILS: 
+ha@wacpcoam.org; goodluckadmin@wacpcoam.org; hodexams@wacpcoam.org;
+sanni.jimah@wacpcoam.org; secgen@wacpcoam.org  AND YOUR CHIEF EXAMINER</p>
+<br><br>
+<p><b>VIRTUAL TOT WORKSHOP WILL HOLD AS FOLLOWS:</b></p>
+
+<p><b>TOPIC: </b>   {{ letter.examination.totTopic }}</p>
+<p> <b>DATE: </b>   {{ letter.examination.totDate }}</p> 
+<p> </b> {{ letter.examination.totDetails }}</p>
+
+Thank you.
+
+            {% endif %}  
+
+              <!-- ghanians that are not examiners end here -->
+
+              <!-- Nigerian that are not examiners start here -->
+                {% if letter.countryOfTheExamination|lower == 'nigeria' or letter.InstitutionAddressCountry == 'nigeria' %}
+
+            <ul>
+            <ol>
+                You will receive a payment of N75,000.00 (Seventy-Five Thousand Naira) for pre-examination preparations.
+ </ol><br>
+
+            <ol>An honorarium of N60,000.00 (Sixty Thousand Naira) will be paid to you for each part of the examination in which you fully participate.
+</ol><br>
+
+            <ol>You are entitled to a meal allowance of N10,000 (Ten Thousand Naira) per weekday and N20,000 (Twenty Thousand Naira) for weekends.
+</ol>
+            
+        </ul>
+
+        
+        
+        NOTE: YOU ARE ENTITLED TO A WELCOME MEAL ON ARRIVAL AT YOUR HOTEL
+
+
+ <br>  
+<p>PLEASE ACKNOWLEDGE THIS MAIL AND COPY THE FOLLOWING EMAILS: 
+ha@wacpcoam.org; goodluckadmin@wacpcoam.org; hodexams@wacpcoam.org;
+sanni.jimah@wacpcoam.org; secgen@wacpcoam.org  AND YOUR CHIEF EXAMINER</p>
+<br><br>
+<p><b>VIRTUAL TOT WORKSHOP WILL HOLD AS FOLLOWS:</b></p>
+
+<p><b>TOPIC: </b>   {{ letter.examination.totTopic }}</p>
+<p> <b>DATE: </b>   {{ letter.examination.totDate }}</p> 
+<p> </b> {{ letter.examination.totDetails }}</p>
+
+Thank you.
+                      {% endif %}
+                            <!-- Nigerians not examiners end here -->
+{% endif %}
+
+  
+<!-- EXCOS AND CE ENDS HERE -->
+
+
+
+
+
+<!-- THIS IS FOR EXAMINERS -->
+{% if letter.role|lower == 'examiner' %}
+
+            <!-- for examiners in ghana start here -->
+              {% if letter.countryOfTheExamination|lower == 'ghana' or letter.InstitutionAddressCountry == 'ghana' %}
+
+     <ul>
+
+        <ol>An honorarium of $50.00 (Fifty US Dollars) will be paid to you for each part of the examination in which you fully participate.
+</ol><br>
+        <ol>
+     You are entitled to a meal allowance of GH300.00 (Three Hundred Ghana Cedis) per day.
+
+        </ol><br>
+     </ul>
+              <br>  
+<p>PLEASE ACKNOWLEDGE THIS MAIL AND COPY THE FOLLOWING EMAILS: 
+ha@wacpcoam.org; goodluckadmin@wacpcoam.org; hodexams@wacpcoam.org;
+sanni.jimah@wacpcoam.org; secgen@wacpcoam.org  AND YOUR CHIEF EXAMINER</p>
+<br><br>
+<p><b>VIRTUAL TOT WORKSHOP WILL HOLD AS FOLLOWS:</b></p>
+
+<p><b>TOPIC: </b>   {{ letter.examination.totTopic }}</p>
+<p> <b>DATE: </b>   {{ letter.examination.totDate }}</p> 
+<p> </b> {{ letter.examination.totDetails }}</p>
+
+Thank you.
+
+            {% endif %}  
+
+
+              <!-- for examiners in ghana ends here here -->
+                            {% if letter.countryOfTheExamination|lower == 'nigeria' %}
+
+   <ul>
+              {% if letter.holdAt|lower != 'online' %}
+            <ol>Please ensure to purchase your return air tickets no later than two weeks before your arrival for the {{ letter.examination.examName }}.
+               Refunds will be processed based on the airline rates applicable two weeks prior to the date of travel. 
+              Kindly submit your flight tickets to: flightticket@wacpcoam.org
+</ol><br> 
+              {% endif %}
+            <ol>An honorarium of N60,000.00 (Sixty Thousand Naira) will be paid to you for each part of the examination in which you fully participate.
+</ol><br>
+            <ol>You are entitled to a meal allowance of N10,000 (Ten Thousand Naira) per weekday and N20,000 (Twenty Thousand Naira) for weekends.
+</ol>
+         </ul>
+                       {% if letter.hotel %}
+        NOTE: YOU ARE ENTITLED TO A WELCOME MEAL ON ARRIVAL AT YOUR HOTEL
+                        {% endif %}
+
+         <br>  
+<p>PLEASE ACKNOWLEDGE THIS MAIL AND COPY THE FOLLOWING EMAILS: 
+ha@wacpcoam.org; goodluckadmin@wacpcoam.org; hodexams@wacpcoam.org;
+sanni.jimah@wacpcoam.org; secgen@wacpcoam.org  AND YOUR CHIEF EXAMINER</p>
+<br><br>
+<p><b>VIRTUAL TOT WORKSHOP WILL HOLD AS FOLLOWS:</b></p>
+
+<p><b>TOPIC: </b>   {{ letter.examination.totTopic }}</p>
+<p> <b>DATE: </b>   {{ letter.examination.totDate }}</p> 
+<p> </b> {{ letter.examination.totDetails }}</p>
+
+Thank you.
+                              {% endif %}
+{% endif %}
+<!-- Examiners end here -->
+
+
+
+
+<br><br>
+<div id="mailholder" style="width: 700px;
+margin: 20px auto;
+border: solid 1px skyblue;
+padding: 20px;
+border-radius: 1%;
+text-align: justify;">
+
+          <div style="width: 700px; text-align: center;"> 
+             <img src="https://wacp-coam.org/images/logo.png" width="300px">
+            </div>
+
+            <br><br>
+    <br>
+   <br>
+                    <b>Dr. {{ letter.surname }} {{ letter.name }}</b>, <br>
+            Department of {{ letter.faculty }},<br>
+            <b>{{ letter.institutionAddress }}</b><br><br>
+            <b>Dear Dr. {{ letter.surname }}</b>,<br><br>
+            <b>INVITATION LETTER FOR THE {{letter.examination.examName }}</b><br><br>
+            On behalf of the President and Council of the West African College of Physicians (WACP), 
+            I have the pleasure of inviting you to serve as <b>{{ letter.role }}</b> for the
+            <b>{{letter.examination.examName }}</b>
+            of the College. Kindly note: <br><br>
+            
+            The examinations would hold  {% if letter.holdAt|lower != 'online' %}at {% endif %}<b>{{ letter.holdAt }}</b><br><br>
+            
+            You will be examining in the <b>{{ letter.membershipOrFellowship }}</b> 
+            Examination of the Faculty of 
+            <b>{{ letter.faculty }}.</b><br><br>
+
+
+          {% if letter.role|lower == 'chief examiner' or  letter.userType|lower == 'exco' or letter.userType|lower == 'internal accessor'  %}
+                     
+          {% endif %}
+
+          
+          {% if letter.holdAt|lower == 'online' %}
+   <!--this is for online examners-->
+
+                       <p>
+             Kindly ensure you continue to fulfil all your 
+            financial obligations to the College(Annual Fellowship Dues 
+            and Building Levy). Please note that for those who are not in good 
+            financial standing, annual dues will be 
+            deducted from the honorarium at source. 
+                     </p>
+
+          <p>As <b>Examiner, it is 
+            mandatory to contribute
+             questions to the Examination
+              Bank of the Faculty and
+            ensure prompt return of 
+            assessed proposals.</b></p>
+            <br>
+
+             <p>
+            <b>NOTE</b>  <br>
+             Kindly indicate your availability via the 
+             email addresses below: ha@wacpcoam.org, goodluckadmin@wacpcoam.org,
+              hodexams@wacpcoam.org, 
+            and copy secgen@wacpcoam.org, 
+            on or before {{ letter.onOrBefore }}. 
+            </p><br>
+
+          {% else %}
+<!--this is for offline /onsite examiners-->
+                        {% if letter.userType|lower != 'exco' and letter.userType != 'chief examiner' %}
+                              <!--those who are not chief examiners and exco-->
+                              {% if letter.holdAt|lower != 'online' and letter.userType|lower != 'chief examiner'  and letter.userType|lower != 'exco' %}
+                              <p>
+                      You are expected to arrive <b>{{ letter.centerOfTheExamination }}</b>, {{ letter.centerOfTheExaminationCountry }}
+                      on <b>{{ letter.arrivalDate }}</b> and depart
+                        on <b>{{ letter.depatureDate }}</b>. A copy of the examination timetable is 
+                        attached.<br>
+                      </p>
+
+                       <p> Examiners are required to purchase their return air 
+            ticket no later than
+             two weeks before their arrival for the
+             <b>{{ letter.examination.examName }}</b>. 
+             Refunds will be processed based on the airline
+             rates applicable two weeks prior to the date 
+             of travel. Kindly submit your flight tickets to:
+             flightticket@wacpcoam.org.</p> <br>
+                              {% endif %}
+          <p>
+             Kindly ensure you continue to fulfil all your 
+            financial obligations to the College(Annual Fellowship Dues 
+            and Building Levy). Please note that for those who are not in good 
+            financial standing, annual dues will be 
+            deducted from the honorarium at source. 
+           
+          </p>
+
+          <p>
+              {% if letter.hotel %}
+            You will be accommodated in <b>{{ letter.centerOfTheExamination }}</b>, at <b> {{ letter.hotel }}</b>.<br><br>          
+            {% endif %}
+          </p>
+
+          <p>As <b>Examiner, it is 
+            mandatory to contribute
+             questions to the Examination
+              Bank of the Faculty and
+            ensure prompt return of 
+            assessed proposals.</b></p>
+            <br>
+                  {% if letter.holdAt|lower != 'online' %}
+            <p>
+                You are kindly advised not to
+             travel at night for security 
+             reasons.
+            </p><br>
+                  {% endif %}
+            <p>
+            <b>NOTE</b>  <br>
+             Kindly indicate your availability via the 
+             email addresses below: ha@wacpcoam.org, goodluckadmin@wacpcoam.org,
+              hodexams@wacpcoam.org, 
+            and copy secgen@wacpcoam.org, 
+            on or before {{ letter.onOrBefore }}. 
+            </p><br>
+                     {% if letter.holdAt|lower != 'online' %}
+              <p>
+                Kindly send your bank account details via email to
+                 flightticket@wacpcoam.org for the payment of
+                  Examiners’ honoraria. (For Nigerian Examiners ONLY).
+              </p>
+                      {% endif %}
+            <p>
+                {% if letter.centerOfTheExamination|lower == 'ibadan'  %}
+           <b>ATTENTION IBADAN EXAMINERS:</b> 
+                As announced by the Nigerian Civil Aviation
+                Authority(NCAA), Ibadan Airport will be out of 
+                service in April 2025 due to a 
+                planned six-month closure for 
+                maintenence and upgrades. We advise examiners 
+                planning to use the airport to make 
+                alternative travel arrangments, including flights 
+                to the nearest airports, with onward 
+                road transportation to Ibadan. The College
+                strongly advises examiners traveling to 
+                Ibadan not to travel past 6pm.
+                {% endif %}
+            </p><br>
+
+                        {% endif %}
+          
+          
+          
+            {% endif %}
+
+                 
+
+            Thank you for your cooperation and support.<br>
+            <img src="https://wacp-coam.org/public/images/letterApp/sg_signature.png"
+            width="207" height="64">  <br> 
+            <b>Dr Musa Dankyau, FWACP, (Fam. Med.)</b><br>
+            Secretary-General <br>
+              </div>
+            </td>
+        </tr>
+      
+        
+</div>
+{% endblock %}

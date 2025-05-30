@@ -16,27 +16,42 @@ class ExamForm(forms.ModelForm):
     class Meta:
         model = Examination
         fields = "__all__"
-        widgets = {
-           # 'TotDate': forms.DateInput(attrs={'type': 'date'}),
-            'totDetails': CKEditor5Widget(
-                attrs={"class":"django_ckeditor_5"}, config_name= "extends"
-            )
-            #'timetableIbadan':forms.ClearableFileInput(attrs={'type': 'form-control'}),
-            #'timetableAccra':forms.ClearableFileInput(attrs={'type': 'form-control'}),
-            #'timetableAbuja':forms.ClearableFileInput(attrs={'type': 'form-control'}),
-            #'travelProtocol':forms.ClearableFileInput(attrs={'type': 'form-control'}),
+        labels = {
+            'examName': 'Exam Name',
+            'totTopic': 'TOT Topic',
+            'totFlyers': 'TOT Flyer(must be jpeg/jpg)',
+            'totDate': 'TOT Date',
+            'totDetails': 'TOT Details',
+            'arrivalinfo': 'Arrival Information(for CEs)',
+            'timetableIbadan': 'Timetable for Ibadan',
+            'timetableAccra': 'Timetable for Accra',
+            'timetableAbuja': 'Timetable for Abuja',
+            'travelProtocol': 'Travel Protocol Document',
         }
+        widgets = {  
+             
+            'examName': forms.TextInput(attrs={'class': 'form-control'}),
+            'totTopic': forms.TextInput(attrs={'class': 'form-control'}),
+            'totDate': forms.TextInput(attrs={'class': 'form-control'}),
+            'arrivalinfo': forms.Textarea(attrs={'class': 'form-control'}),
+            'totDetails': forms.Textarea(attrs={'class': 'form-control'}),
+            'totFlyers': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'timetableIbadan': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'timetableAccra': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'timetableAbuja': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'travelProtocol': forms.ClearableFileInput(attrs={'class': 'form-control'}),
 
-        #examName = forms.CharField(max_length=300,widget=forms.TextInput(attrs={'class': 'form-control'}))
-        #totTopic = forms.CharField(max_length=400,widget=forms.TextInput(attrs={'class': 'form-control'}))
-        #totFlyers = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
-        #totDate = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control'}))
-        #totDetails = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}))
-        #timetableIbadan = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
-        #timetableAccra = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
-        #timetableAbuja = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
-        #travelProtocol = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
-        
+            #'examName' : forms.CharField(max_length=300,widget=forms.TextInput(attrs={'class': 'form-control'})),
+            #'totTopic' : forms.CharField(max_length=400,widget=forms.TextInput(attrs={'class': 'form-control'})),
+            #'totFlyers' : forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'})),
+            #'totDate' : forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control'})),
+            #'arrivalinfo' : forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4})),
+            #'totDetails' : forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4})),
+            #'timetableIbadan' : forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'})),
+            #'timetableAccra' : forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'})),
+            #'timetableAbuja' : forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'})),
+            #'travelProtocol' : forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'})),
+        }
 
        
 

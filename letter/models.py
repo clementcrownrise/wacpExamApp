@@ -31,6 +31,7 @@ class Letter(TimeStampedModel):
     depatureDate = models.CharField(max_length=20, default='')
     email = models.CharField(max_length=200)
     userType = models.CharField(max_length=200, default='')
+    status = models.CharField(max_length=200, default='Not Sent')
     
 
     def __str__(self):

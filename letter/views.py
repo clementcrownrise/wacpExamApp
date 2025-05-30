@@ -36,9 +36,12 @@ def index(request):
                 #return HttpResponse('am ai getting the right thing')
                 examination = request.POST.get('examination')
                 faculty =request.POST.get('faculty')
-                letters = Letter.objects.filter(Q(examination_id = examination)
-                                         & Q(faculty__icontains=faculty))
-                #return HttpResponse(faculty)
+                status = request.POST.get('status')
+                #return HttpResponse(status)
+
+                letters = Letter.objects.filter(examination_id = examination,
+                                         faculty__icontains=faculty,
+                                         status__iexact=status)
                 paginator = Paginator(letters, 50)
                 page_number = request.GET.get("page")
                 page_obj = paginator.get_page(page_number) 
@@ -48,8 +51,8 @@ def index(request):
                    'form': form,
                     'page_obj': page_obj,
                    'faculties': faculties,
-                   'examinations':examinations})
-
+                   'examinations':examinations
+                   })
 
 
 
@@ -193,20 +196,16 @@ def generate_pdf(letter):
 def sendLetter(request):
     examination = request.POST.get('examination')
     facultyName = request.POST.get('faculty')
-    letters = Letter.objects.filter(Q(examination_id = examination)
-                                         & Q(faculty__icontains=facultyName))
-
+    status = request.POST.get('status')
+    letters = Letter.objects.filter(examination_id = examination,
+                                        faculty__icontains=facultyName,status__iexact=status)
+    
     #return HttpResponse(letters)
     examination = Examination.objects.get(id = examination)
     subject = examination.examName
     #return HttpResponse(examination.examName)
     totFlyer = examination.totFlyers
-    #return HttpResponse(totFlyer)
-    #timetableIbadan = 'media/uploads/'
-    #timetableAccra = 'media/uploads/'
-    #timetableAbuja= 'media/uploads/'
-    #travelProtocol = 'media/uploads/'
-    #totFlyer = 'media/uploads/'
+    
 
     abujaTimeTable = examination.timetableAbuja
     accraTimeTable = examination.timetableAccra
@@ -287,5 +286,8 @@ def sendLetter(request):
             with open(image_path, 'rb') as img:
                 email.attach(image_name, img.read(), file_type) 
         email.send()  #
+        if email.send:
+             letter.status = 'Sent'
+             letter.save()
     
     return HttpResponse("Emails have been sent!")

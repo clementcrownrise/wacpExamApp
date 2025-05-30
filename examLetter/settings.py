@@ -191,11 +191,19 @@ WSGI_APPLICATION = "examLetter.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'wacpexamletter',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',  # Or IP address of your DB server
+        'PORT': '3306',        # Default MySQL port
+        'OPTIONS': {
+            'charset': 'utf8mb4',  # Optional but recommended
+        }
     }
 }
+
 
 
 # Password validation

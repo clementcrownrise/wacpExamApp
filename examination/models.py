@@ -11,6 +11,7 @@ class Examination(models.Model):
     totFlyers =models.ImageField(upload_to='uploads/' , blank=True, null=True)
     totDate = models.CharField(max_length=200)
     totDetails = CKEditor5Field('TOT Details', config_name='comment')
+    arrivalinfo = models.CharField(max_length=300)
     timetableIbadan = models.FileField(upload_to='uploads/')
     timetableAccra = models.FileField(upload_to='uploads/')
     timetableAbuja = models.FileField(upload_to='uploads/')
